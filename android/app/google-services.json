@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "656861202725",
+    "project_id": "chatbox-41f85",
+    "storage_bucket": "chatbox-41f85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656861202725:android:59c3a40fbb9fb26d52f2cc",
+        "android_client_info": {
+          "package_name": "com.example.chatbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656861202725-vvg8o9epvm3hhjii50hctvfbc4q21p08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAt2TCzSRvaEPSLXMGyuuqJTim81NQW4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656861202725-vvg8o9epvm3hhjii50hctvfbc4q21p08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656861202725:android:5f1d8f52e6095d8552f2cc",
+        "android_client_info": {
+          "package_name": "com.example.chatroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656861202725-v5ah12jjjca7i2d4klh9gevtf3fjibct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatroom",
+            "certificate_hash": "e58ba08bbec47dc0b572cb427e6d00894eaebff3"
+          }
+        },
+        {
+          "client_id": "656861202725-vvg8o9epvm3hhjii50hctvfbc4q21p08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAt2TCzSRvaEPSLXMGyuuqJTim81NQW4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656861202725-vvg8o9epvm3hhjii50hctvfbc4q21p08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
