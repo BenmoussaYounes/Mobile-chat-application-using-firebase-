@@ -1,3 +1,5 @@
+import 'package:chatroom/screens/Chat/components/messages.dart';
+import 'package:chatroom/screens/Chat/components/newmessages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,35 +42,17 @@ class _chat_screenState extends State<chat_screen> {
                       FirebaseAuth.instance.signOut();
                }
               }
-               
               ),
               const SizedBox(width: 10)
         ],
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('chats/9TDJslWxm7SviEy4RYz2/messages')
-            .snapshots(),
-        builder: (ctx, Snapshot) {
-          if (Snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          }
-          final docs = (Snapshot.data! as QuerySnapshot).docs;
-          return ListView.builder(
-              itemCount: docs.length,
-              itemBuilder: (ctx, index) => Container(
-                    padding: EdgeInsets.all(8),
-                    child: Text("${docs[index]['text']} "),
-                  ));
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          FirebaseFirestore.instance
-              .collection('chats/9TDJslWxm7SviEy4RYz2/messages')
-              .add({'text': ''});
-        },
+      body: Container(
+        child: Column(
+          children: const <Widget>[
+            Messages(),
+            NewMessages()
+          ],
+        ),
       ),
     );
   }

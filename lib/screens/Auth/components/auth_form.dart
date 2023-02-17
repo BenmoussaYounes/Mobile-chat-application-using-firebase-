@@ -1,10 +1,13 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:chatroom/screens/Chat/chatScreen.dart';
+import 'package:chatroom/screens/pickers/UserImagePicker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class authform extends StatefulWidget {
-   final void Function(String email, String password, String username, bool islogin, BuildContext ctx) submit_fc;
+   final void Function(String email, String password, String username, bool islogin, XFile? image, BuildContext ctx) submit_fc;
   bool isloading;
   authform(this.submit_fc, this.isloading);
 
@@ -13,19 +16,31 @@ class authform extends StatefulWidget {
 }
 
 class _authform_State extends State<authform> {
-  bool _isLogin = false ;
+  bool _isLogin = false;
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _user_name = '';
   String _password = '';
-  _submit(){
-   
-    final _isvalid = _formKey.currentState!.validate();
-    print('isvalid ${_isvalid}');
+  XFile? _userImageFile ;
+  void _pickImage(XFile pickedImage){
+   _userImageFile = pickedImage;
+  }
+
+  _submit(){ 
     FocusScope.of(context).unfocus();
+    final _isvalid = _formKey.currentState!.validate();
+
+    print('isvalid ${_isvalid}');
+    if(_isLogin == false){
+       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please pick an image :D'),
+      backgroundColor: Colors.redAccent,
+      ));
+      return;
+    }
     if(_isvalid){
      _formKey.currentState!.save();
-     widget.submit_fc(_email.trim(),_password.trim(),_user_name.trim(),_isLogin, context);
+     print('here ERROR ->');
+     widget.submit_fc(_email.trim(),_password.trim(),_user_name.trim(),_isLogin, _userImageFile, context);
     }
   }
 
@@ -37,19 +52,23 @@ class _authform_State extends State<authform> {
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                emailForm(),
-                if(!_isLogin) usenameForm(),
-                passwordForm(),
-                if(widget.isloading == true) CircularProgressIndicator(),
-                if (widget.isloading == false)
-                loginButton(),
-                if(widget.isloading == false)newaccButton()
-                
-              ],
+            child: Container(
+              margin: EdgeInsets.all(17),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  if(!_isLogin)  UserImagePicker(_pickImage),
+                  emailForm(),
+                  if(!_isLogin) usenameForm(),
+                  passwordForm(),
+                  if(widget.isloading == true) const CircularProgressIndicator(),
+                  if (widget.isloading == false)
+                  loginButton(),
+                  if(widget.isloading == false)newaccButton()
+                  
+                ],
+              ),
             ),
           ),
         ),
@@ -122,8 +141,13 @@ class _authform_State extends State<authform> {
 
   Padding loginButton() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8, left: 5, right: 5),
+      padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+              //backgroundColor: Colors.pink,
+              fixedSize: const Size(120, 40),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50))),
         onPressed: () {
             _submit();
             //ScaffoldMessenger.of(context)
